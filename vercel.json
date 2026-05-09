@@ -1,0 +1,18 @@
+{
+  "crons": [
+    {
+      "path": "/api/cron/trial-reminders",
+      "schedule": "0 9 * * *"
+    }
+  ],
+  "functions": {
+    "app/api/cv/download/[id]/route.ts": {
+      "maxDuration": 60,
+      "memory": 1024
+    },
+    "app/api/cv/build-download/route.ts": {
+      "maxDuration": 60,
+      "memory": 1024
+    }
+  }
+}
