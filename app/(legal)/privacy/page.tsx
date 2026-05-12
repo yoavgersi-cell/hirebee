@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   description: "How HireBee collects, uses, and protects your personal data.",
   alternates: { canonical: "https://hirebee.app/privacy" },
   robots: { index: true, follow: true },
+  openGraph: { title: "Privacy Policy | HireBee", description: "How HireBee collects, uses, and protects your personal data.", url: "https://hirebee.app/privacy" },
 }
 
 export default function PrivacyPage() {

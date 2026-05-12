@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   description: "HireBee's refund and cancellation policy for paid subscriptions.",
   alternates: { canonical: "https://hirebee.app/refund" },
   robots: { index: true, follow: true },
+  openGraph: { title: "Refund Policy | HireBee", description: "HireBee's refund and cancellation policy for paid subscriptions.", url: "https://hirebee.app/refund" },
 }
 
 export default function RefundPage() {

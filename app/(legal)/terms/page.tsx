@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   description: "The terms and conditions that govern your use of HireBee.",
   alternates: { canonical: "https://hirebee.app/terms" },
   robots: { index: true, follow: true },
+  openGraph: { title: "Terms of Service | HireBee", description: "The terms and conditions that govern your use of HireBee.", url: "https://hirebee.app/terms" },
 }
 
 export default function TermsPage() {

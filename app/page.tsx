@@ -200,8 +200,28 @@ export default async function HomePage() {
     "@type": "Organization",
     name: "HireBee",
     url: "https://hirebee.app",
-    logo: "https://hirebee.app/icon.svg",
-    sameAs: [],
+    logo: {
+      "@type": "ImageObject",
+      url: "https://hirebee.app/icon.svg",
+      width: 512,
+      height: 512,
+    },
+    sameAs: [
+      "https://twitter.com/hirebeeapp",
+      "https://www.linkedin.com/company/hirebee",
+    ],
+  }
+
+  const websiteLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "HireBee",
+    url: "https://hirebee.app",
+    potentialAction: {
+      "@type": "SearchAction",
+      target: { "@type": "EntryPoint", urlTemplate: "https://hirebee.app/blog?q={search_term_string}" },
+      "query-input": "required name=search_term_string",
+    },
   }
 
   const faqLd = {
@@ -256,6 +276,7 @@ export default async function HomePage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteLd) }} />
       <LandingNav />
 
 

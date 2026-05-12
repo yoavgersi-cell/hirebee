@@ -20,6 +20,42 @@ export const metadata: Metadata = {
   },
 }
 
+const faqLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "Is the ATS resume scanner free?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes. You can scan your resume for free with no account required. Paste your resume and job description and get your ATS score in under 60 seconds.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What does an ATS score mean?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "An ATS score tells you how likely your resume is to pass automated applicant tracking system filters. A higher score means more recruiters will actually see your application. HireBee scores keyword match, formatting, and impact language.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "How do I improve my ATS score?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Add the exact keywords from the job description, use standard section headings (Experience, Education, Skills), avoid tables and graphics, and quantify your bullet points with numbers and outcomes. HireBee shows you exactly which keywords to add and rewrites weak bullets automatically.",
+      },
+    },
+  ],
+}
+
 export default function AnalyzeLayout({ children }: { children: React.ReactNode }) {
-  return <>{children}</>
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
+      {children}
+    </>
+  )
 }

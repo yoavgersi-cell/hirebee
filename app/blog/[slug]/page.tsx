@@ -58,9 +58,31 @@ export default async function BlogPostPage({ params }: Props) {
     description: post.description,
     datePublished: post.isoDate,
     dateModified: post.isoDate,
-    author: { "@type": "Organization", name: "HireBee", url: "https://hirebee.app" },
-    publisher: { "@type": "Organization", name: "HireBee", url: "https://hirebee.app" },
+    author: {
+      "@type": "Organization",
+      name: "HireBee",
+      url: "https://hirebee.app",
+      logo: { "@type": "ImageObject", url: "https://hirebee.app/icon.svg" },
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "HireBee",
+      url: "https://hirebee.app",
+      logo: { "@type": "ImageObject", url: "https://hirebee.app/icon.svg" },
+    },
     url: `https://hirebee.app/blog/${slug}`,
+    mainEntityOfPage: { "@type": "WebPage", "@id": `https://hirebee.app/blog/${slug}` },
+    image: "https://hirebee.app/api/og",
+  }
+
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://hirebee.app" },
+      { "@type": "ListItem", position: 2, name: "Blog", item: "https://hirebee.app/blog" },
+      { "@type": "ListItem", position: 3, name: post.title, item: `https://hirebee.app/blog/${slug}` },
+    ],
   }
 
   return (
@@ -68,6 +90,10 @@ export default async function BlogPostPage({ params }: Props) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
       />
 
       {/* ── Nav ── */}
