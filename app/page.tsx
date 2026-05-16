@@ -581,6 +581,132 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* ── LINKEDIN ── */}
+      <section className="py-12 md:py-24 px-6 bg-gray-950 border-t border-white/5 relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-sky-500/4 rounded-full blur-3xl pointer-events-none" />
+        <div className="max-w-5xl mx-auto relative">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+
+            {/* Left — mock */}
+            <div className="order-2 lg:order-1">
+              <div className="w-full max-w-sm mx-auto select-none">
+                {/* Browser chrome */}
+                <div className="bg-gray-800 rounded-t-2xl px-4 py-3 flex items-center gap-2 border border-white/8 border-b-0">
+                  <div className="flex gap-1.5">
+                    <div className="w-3 h-3 rounded-full bg-red-500/50" />
+                    <div className="w-3 h-3 rounded-full bg-amber-500/50" />
+                    <div className="w-3 h-3 rounded-full bg-green-500/50" />
+                  </div>
+                  <div className="flex-1 bg-gray-700/60 rounded-md h-5 flex items-center px-3 ml-2">
+                    <span className="text-[10px] text-gray-400">hirebee.app/linkedin</span>
+                  </div>
+                </div>
+
+                {/* Card */}
+                <div className="bg-gray-900 border border-white/8 border-t-0 rounded-b-2xl px-5 py-5 space-y-5">
+                  {/* Score row */}
+                  <div className="flex items-center gap-4">
+                    <div className="relative w-16 h-16 shrink-0">
+                      <svg viewBox="0 0 36 36" className="w-16 h-16 -rotate-90">
+                        <circle cx="18" cy="18" r="15.9" fill="none" stroke="#1f2937" strokeWidth="3.5" />
+                        <circle cx="18" cy="18" r="15.9" fill="none" stroke="#0ea5e9" strokeWidth="3.5"
+                          strokeDasharray="72 100" strokeLinecap="round" />
+                      </svg>
+                      <span className="absolute inset-0 flex items-center justify-center text-base font-extrabold text-white">72</span>
+                    </div>
+                    <div>
+                      <p className="text-xs font-bold text-sky-400 uppercase tracking-widest mb-0.5">LinkedIn Score</p>
+                      <p className="text-white text-sm font-semibold leading-snug">Needs improvement</p>
+                      <p className="text-white/35 text-xs">Recruiters can&apos;t find you easily</p>
+                    </div>
+                  </div>
+
+                  {/* Section scores */}
+                  <div className="space-y-2.5">
+                    {[
+                      { label: "Headline",      score: 58, color: "#f87171" },
+                      { label: "About section", score: 71, color: "#f59e0b" },
+                      { label: "Experience",    score: 83, color: "#14b8a6" },
+                      { label: "Searchability", score: 65, color: "#f59e0b" },
+                    ].map((item) => (
+                      <div key={item.label} className="flex items-center gap-3">
+                        <span className="text-[11px] text-white/40 w-24 shrink-0">{item.label}</span>
+                        <div className="flex-1 h-1.5 bg-white/8 rounded-full overflow-hidden">
+                          <div className="h-full rounded-full" style={{ width: `${item.score}%`, background: item.color }} />
+                        </div>
+                        <span className="text-[11px] font-semibold w-6 text-right" style={{ color: item.color }}>{item.score}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Quick wins */}
+                  <div className="bg-amber-500/8 border border-amber-500/20 rounded-xl p-3.5">
+                    <p className="text-[10px] font-bold text-amber-400 uppercase tracking-widest mb-2">3 quick wins</p>
+                    <ul className="space-y-1.5">
+                      {[
+                        'Add "Python" and "SQL" to headline',
+                        "Your About has no call to action",
+                        "Missing 4 role-specific keywords",
+                      ].map((w) => (
+                        <li key={w} className="flex items-start gap-2 text-[11px] text-white/55">
+                          <span className="text-amber-400 shrink-0 mt-0.5">→</span> {w}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Rewrite preview */}
+                  <div className="bg-white/3 border border-white/8 rounded-xl p-3.5">
+                    <p className="text-[10px] font-bold text-white/30 uppercase tracking-widest mb-2">AI headline rewrite</p>
+                    <p className="text-[11px] text-white/30 line-through mb-1.5">&ldquo;Software Developer at Acme&rdquo;</p>
+                    <p className="text-[11px] text-sky-300 leading-relaxed">&ldquo;Full-Stack Engineer · Python · SQL · Building data products that ship&rdquo;</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right — copy */}
+            <div className="order-1 lg:order-2">
+              <p className="text-xs font-semibold text-sky-400 uppercase tracking-widest mb-4">LinkedIn Optimizer</p>
+              <h2 className="text-3xl md:text-4xl font-extrabold text-white leading-tight mb-5">
+                Recruiters search LinkedIn.<br />
+                <span className="text-sky-400">Make sure they find you.</span>
+              </h2>
+              <p className="text-white/50 text-base leading-relaxed mb-8">
+                Most people set up their LinkedIn once and forget it. Recruiters use keyword search — if your profile doesn&apos;t have the right terms, you&apos;re invisible. HireBee scores every section and rewrites what&apos;s holding you back.
+              </p>
+
+              <div className="space-y-4 mb-9">
+                {[
+                  { title: "Section-by-section scoring", desc: "Headline, About, Experience, and searchability — each scored separately so you know exactly where you lose recruiters." },
+                  { title: "Keyword gap analysis", desc: "See which keywords recruiters in your field search for — and which ones are missing from your profile." },
+                  { title: "AI rewrites for every section", desc: "Get a rewritten headline and About section that leads with impact and includes the keywords that matter." },
+                ].map((item) => (
+                  <div key={item.title} className="flex gap-3">
+                    <div className="w-5 h-5 rounded-full bg-sky-500/20 border border-sky-500/30 flex items-center justify-center shrink-0 mt-0.5">
+                      <div className="w-1.5 h-1.5 rounded-full bg-sky-400" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-white mb-0.5">{item.title}</p>
+                      <p className="text-sm text-white/40 leading-relaxed">{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <Link
+                href="/linkedin"
+                className="inline-flex items-center gap-2 bg-sky-500 hover:bg-sky-400 text-white font-semibold px-6 py-3 rounded-full transition-colors text-sm shadow-lg shadow-sky-500/20"
+              >
+                Optimize my LinkedIn <ArrowRight className="w-4 h-4" />
+              </Link>
+              <p className="text-white/25 text-xs mt-3">Included in Pro · 7-day free trial</p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
       {/* ── MID-PAGE CTA ── */}
       <section className="py-10 px-6 bg-white border-b border-gray-100">
         <div className="max-w-3xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6 bg-gray-950 rounded-2xl px-7 py-6">
@@ -810,132 +936,6 @@ export default async function HomePage() {
 
       {/* ── TEMPLATES ── */}
       <LandingTemplates />
-
-      {/* ── LINKEDIN ── */}
-      <section className="py-12 md:py-24 px-6 bg-gray-950 border-t border-white/5 relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-sky-500/4 rounded-full blur-3xl pointer-events-none" />
-        <div className="max-w-5xl mx-auto relative">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-
-            {/* Left — mock */}
-            <div className="order-2 lg:order-1">
-              <div className="w-full max-w-sm mx-auto select-none">
-                {/* Browser chrome */}
-                <div className="bg-gray-800 rounded-t-2xl px-4 py-3 flex items-center gap-2 border border-white/8 border-b-0">
-                  <div className="flex gap-1.5">
-                    <div className="w-3 h-3 rounded-full bg-red-500/50" />
-                    <div className="w-3 h-3 rounded-full bg-amber-500/50" />
-                    <div className="w-3 h-3 rounded-full bg-green-500/50" />
-                  </div>
-                  <div className="flex-1 bg-gray-700/60 rounded-md h-5 flex items-center px-3 ml-2">
-                    <span className="text-[10px] text-gray-400">hirebee.app/linkedin</span>
-                  </div>
-                </div>
-
-                {/* Card */}
-                <div className="bg-gray-900 border border-white/8 border-t-0 rounded-b-2xl px-5 py-5 space-y-5">
-                  {/* Score row */}
-                  <div className="flex items-center gap-4">
-                    <div className="relative w-16 h-16 shrink-0">
-                      <svg viewBox="0 0 36 36" className="w-16 h-16 -rotate-90">
-                        <circle cx="18" cy="18" r="15.9" fill="none" stroke="#1f2937" strokeWidth="3.5" />
-                        <circle cx="18" cy="18" r="15.9" fill="none" stroke="#0ea5e9" strokeWidth="3.5"
-                          strokeDasharray="72 100" strokeLinecap="round" />
-                      </svg>
-                      <span className="absolute inset-0 flex items-center justify-center text-base font-extrabold text-white">72</span>
-                    </div>
-                    <div>
-                      <p className="text-xs font-bold text-sky-400 uppercase tracking-widest mb-0.5">LinkedIn Score</p>
-                      <p className="text-white text-sm font-semibold leading-snug">Needs improvement</p>
-                      <p className="text-white/35 text-xs">Recruiters can't find you easily</p>
-                    </div>
-                  </div>
-
-                  {/* Section scores */}
-                  <div className="space-y-2.5">
-                    {[
-                      { label: "Headline",      score: 58, color: "#f87171" },
-                      { label: "About section", score: 71, color: "#f59e0b" },
-                      { label: "Experience",    score: 83, color: "#14b8a6" },
-                      { label: "Searchability", score: 65, color: "#f59e0b" },
-                    ].map((item) => (
-                      <div key={item.label} className="flex items-center gap-3">
-                        <span className="text-[11px] text-white/40 w-24 shrink-0">{item.label}</span>
-                        <div className="flex-1 h-1.5 bg-white/8 rounded-full overflow-hidden">
-                          <div className="h-full rounded-full" style={{ width: `${item.score}%`, background: item.color }} />
-                        </div>
-                        <span className="text-[11px] font-semibold w-6 text-right" style={{ color: item.color }}>{item.score}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Quick wins */}
-                  <div className="bg-amber-500/8 border border-amber-500/20 rounded-xl p-3.5">
-                    <p className="text-[10px] font-bold text-amber-400 uppercase tracking-widest mb-2">3 quick wins</p>
-                    <ul className="space-y-1.5">
-                      {[
-                        'Add "Python" and "SQL" to headline',
-                        "Your About has no call to action",
-                        "Missing 4 role-specific keywords",
-                      ].map((w) => (
-                        <li key={w} className="flex items-start gap-2 text-[11px] text-white/55">
-                          <span className="text-amber-400 shrink-0 mt-0.5">→</span> {w}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Rewrite preview */}
-                  <div className="bg-white/3 border border-white/8 rounded-xl p-3.5">
-                    <p className="text-[10px] font-bold text-white/30 uppercase tracking-widest mb-2">AI headline rewrite</p>
-                    <p className="text-[11px] text-white/30 line-through mb-1.5">"Software Developer at Acme"</p>
-                    <p className="text-[11px] text-sky-300 leading-relaxed">"Full-Stack Engineer · Python · SQL · Building data products that ship"</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Right — copy */}
-            <div className="order-1 lg:order-2">
-              <p className="text-xs font-semibold text-sky-400 uppercase tracking-widest mb-4">LinkedIn Optimizer</p>
-              <h2 className="text-3xl md:text-4xl font-extrabold text-white leading-tight mb-5">
-                Recruiters search LinkedIn.<br />
-                <span className="text-sky-400">Make sure they find you.</span>
-              </h2>
-              <p className="text-white/50 text-base leading-relaxed mb-8">
-                Most people set up their LinkedIn once and forget it. Recruiters use keyword search — if your profile doesn&apos;t have the right terms, you&apos;re invisible. HireBee scores every section and rewrites what&apos;s holding you back.
-              </p>
-
-              <div className="space-y-4 mb-9">
-                {[
-                  { title: "Section-by-section scoring", desc: "Headline, About, Experience, and searchability — each scored separately so you know exactly where you lose recruiters." },
-                  { title: "Keyword gap analysis", desc: "See which keywords recruiters in your field search for — and which ones are missing from your profile." },
-                  { title: "AI rewrites for every section", desc: "Get a rewritten headline and About section that leads with impact and includes the keywords that matter." },
-                ].map((item) => (
-                  <div key={item.title} className="flex gap-3">
-                    <div className="w-5 h-5 rounded-full bg-sky-500/20 border border-sky-500/30 flex items-center justify-center shrink-0 mt-0.5">
-                      <div className="w-1.5 h-1.5 rounded-full bg-sky-400" />
-                    </div>
-                    <div>
-                      <p className="text-sm font-semibold text-white mb-0.5">{item.title}</p>
-                      <p className="text-sm text-white/40 leading-relaxed">{item.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <Link
-                href="/linkedin"
-                className="inline-flex items-center gap-2 bg-sky-500 hover:bg-sky-400 text-white font-semibold px-6 py-3 rounded-full transition-colors text-sm shadow-lg shadow-sky-500/20"
-              >
-                Optimize my LinkedIn <ArrowRight className="w-4 h-4" />
-              </Link>
-              <p className="text-white/25 text-xs mt-3">Included in Pro · 7-day free trial</p>
-            </div>
-
-          </div>
-        </div>
-      </section>
 
       {/* ── FINAL CTA ── */}
       <section className="py-10 md:py-24 px-6 bg-gray-950">
