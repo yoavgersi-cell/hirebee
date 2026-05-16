@@ -1,8 +1,8 @@
 import { Metadata } from "next"
 import Link from "next/link"
 import {
-  Scan, FileText, Mail, Linkedin, Layout,
-  ArrowRight, CheckCircle2, Lock,
+  Scan, FileText, Mail, Globe, Layout,
+  ArrowRight, CheckCircle2,
 } from "lucide-react"
 import { HireBeeLogo } from "@/components/hirebee-logo"
 
@@ -76,7 +76,7 @@ const TOOLS = [
   {
     id: "linkedin",
     href: "/linkedin",
-    icon: Linkedin,
+    icon: Globe,
     badge: "Trial / Pro",
     badgeColor: "bg-sky-500/15 text-sky-400 border-sky-500/25",
     title: "LinkedIn Optimizer",

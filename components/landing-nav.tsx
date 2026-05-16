@@ -2,14 +2,14 @@
 
 import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
-import { Menu, X, ChevronDown, Scan, Layout, Mail, Linkedin, FileText } from "lucide-react"
+import { Menu, X, ChevronDown, Scan, Layout, Mail, Globe, FileText } from "lucide-react"
 import { HireBeeLogo } from "@/components/hirebee-logo"
 
 const AI_TOOLS = [
   { label: "ATS Resume Scanner", href: "/analyze", icon: Scan, badge: "Free" },
   { label: "AI Resume Builder", href: "/builder", icon: Layout, badge: "Trial" },
   { label: "Cover Letter Generator", href: "/cover-letter", icon: Mail, badge: "Trial" },
-  { label: "LinkedIn Optimizer", href: "/linkedin", icon: Linkedin, badge: "Trial" },
+  { label: "LinkedIn Optimizer", href: "/linkedin", icon: Globe, badge: "Trial" },
   { label: "CV Examples by Role", href: "/cv-examples", icon: FileText, badge: "Free" },
 ]
 
