@@ -106,9 +106,9 @@ export function LandingNav() {
           <Link href="/blog" className="text-sm text-white/55 hover:text-white transition-colors">
             Blog
           </Link>
-          <a href="/#pricing" className="text-sm text-white/55 hover:text-white transition-colors">
+          <Link href="/pricing" className="text-sm text-white/55 hover:text-white transition-colors">
             Pricing
-          </a>
+          </Link>
           <Link href="/about" className="text-sm text-white/55 hover:text-white transition-colors">
             About
           </Link>
@@ -181,13 +181,13 @@ export function LandingNav() {
           >
             Blog
           </Link>
-          <a
-            href="/#pricing"
+          <Link
+            href="/pricing"
             onClick={() => setMobileOpen(false)}
             className="block text-sm text-white/70 hover:text-white py-2.5 transition-colors"
           >
             Pricing
-          </a>
+          </Link>
           <Link
             href="/about"
             onClick={() => setMobileOpen(false)}
