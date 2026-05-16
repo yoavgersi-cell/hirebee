@@ -583,83 +583,91 @@ export default async function HomePage() {
 
       {/* ── LINKEDIN ── */}
       <section className="py-12 md:py-24 px-6 bg-gray-950 border-t border-white/5 relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-sky-500/4 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-[#0A66C2]/5 rounded-full blur-3xl pointer-events-none" />
         <div className="max-w-5xl mx-auto relative">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
-            {/* Left — mock */}
+            {/* Left — analysis card mock */}
             <div className="order-2 lg:order-1">
-              <div className="w-full max-w-sm mx-auto select-none">
-                {/* Browser chrome */}
-                <div className="bg-gray-800 rounded-t-2xl px-4 py-3 flex items-center gap-2 border border-white/8 border-b-0">
-                  <div className="flex gap-1.5">
-                    <div className="w-3 h-3 rounded-full bg-red-500/50" />
-                    <div className="w-3 h-3 rounded-full bg-amber-500/50" />
-                    <div className="w-3 h-3 rounded-full bg-green-500/50" />
-                  </div>
-                  <div className="flex-1 bg-gray-700/60 rounded-md h-5 flex items-center px-3 ml-2">
-                    <span className="text-[10px] text-gray-400">hirebee.app/linkedin</span>
-                  </div>
-                </div>
-
+              <div className="w-full max-w-[340px] mx-auto select-none">
                 {/* Card */}
-                <div className="bg-gray-900 border border-white/8 border-t-0 rounded-b-2xl px-5 py-5 space-y-5">
-                  {/* Score row */}
-                  <div className="flex items-center gap-4">
-                    <div className="relative w-16 h-16 shrink-0">
-                      <svg viewBox="0 0 36 36" className="w-16 h-16 -rotate-90">
-                        <circle cx="18" cy="18" r="15.9" fill="none" stroke="#1f2937" strokeWidth="3.5" />
-                        <circle cx="18" cy="18" r="15.9" fill="none" stroke="#0ea5e9" strokeWidth="3.5"
-                          strokeDasharray="72 100" strokeLinecap="round" />
-                      </svg>
-                      <span className="absolute inset-0 flex items-center justify-center text-base font-extrabold text-white">72</span>
+                <div className="bg-[#111827] border border-white/10 rounded-2xl overflow-hidden shadow-2xl shadow-black/40">
+
+                  {/* Profile strip */}
+                  <div className="bg-[#0A66C2]/10 border-b border-white/8 px-5 py-4 flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#0A66C2] to-sky-400 flex items-center justify-center shrink-0">
+                      <span className="text-white font-bold text-sm">JD</span>
                     </div>
-                    <div>
-                      <p className="text-xs font-bold text-sky-400 uppercase tracking-widest mb-0.5">LinkedIn Score</p>
-                      <p className="text-white text-sm font-semibold leading-snug">Needs improvement</p>
-                      <p className="text-white/35 text-xs">Recruiters can&apos;t find you easily</p>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-semibold text-white truncate">Jamie Davidson</p>
+                      <p className="text-[11px] text-white/40 truncate">Software Developer at Acme Corp</p>
                     </div>
+                    {/* LinkedIn logo */}
+                    <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="#0A66C2">
+                      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>
                   </div>
 
-                  {/* Section scores */}
-                  <div className="space-y-2.5">
-                    {[
-                      { label: "Headline",      score: 58, color: "#f87171" },
-                      { label: "About section", score: 71, color: "#f59e0b" },
-                      { label: "Experience",    score: 83, color: "#14b8a6" },
-                      { label: "Searchability", score: 65, color: "#f59e0b" },
-                    ].map((item) => (
-                      <div key={item.label} className="flex items-center gap-3">
-                        <span className="text-[11px] text-white/40 w-24 shrink-0">{item.label}</span>
-                        <div className="flex-1 h-1.5 bg-white/8 rounded-full overflow-hidden">
-                          <div className="h-full rounded-full" style={{ width: `${item.score}%`, background: item.color }} />
-                        </div>
-                        <span className="text-[11px] font-semibold w-6 text-right" style={{ color: item.color }}>{item.score}</span>
+                  <div className="px-5 py-5 space-y-4">
+                    {/* Score row */}
+                    <div className="flex items-center gap-4">
+                      <div className="relative w-14 h-14 shrink-0">
+                        <svg viewBox="0 0 36 36" className="w-14 h-14 -rotate-90">
+                          <circle cx="18" cy="18" r="15.9" fill="none" stroke="#1f2937" strokeWidth="4" />
+                          <circle cx="18" cy="18" r="15.9" fill="none" stroke="#0A66C2" strokeWidth="4"
+                            strokeDasharray="72 100" strokeLinecap="round" />
+                        </svg>
+                        <span className="absolute inset-0 flex items-center justify-center text-sm font-extrabold text-white">72</span>
                       </div>
-                    ))}
-                  </div>
+                      <div>
+                        <p className="text-xs font-semibold text-white/50 mb-0.5">Profile score</p>
+                        <p className="text-sm font-bold text-white">Needs improvement</p>
+                        <p className="text-[11px] text-red-400/80">Low recruiter visibility</p>
+                      </div>
+                    </div>
 
-                  {/* Quick wins */}
-                  <div className="bg-amber-500/8 border border-amber-500/20 rounded-xl p-3.5">
-                    <p className="text-[10px] font-bold text-amber-400 uppercase tracking-widest mb-2">3 quick wins</p>
-                    <ul className="space-y-1.5">
+                    {/* Section scores */}
+                    <div className="space-y-2">
                       {[
-                        'Add "Python" and "SQL" to headline',
-                        "Your About has no call to action",
-                        "Missing 4 role-specific keywords",
-                      ].map((w) => (
-                        <li key={w} className="flex items-start gap-2 text-[11px] text-white/55">
-                          <span className="text-amber-400 shrink-0 mt-0.5">→</span> {w}
-                        </li>
+                        { label: "Headline",      score: 58, color: "#f87171" },
+                        { label: "About",          score: 71, color: "#f59e0b" },
+                        { label: "Experience",    score: 83, color: "#22c55e" },
+                        { label: "Searchability", score: 65, color: "#f59e0b" },
+                      ].map((item) => (
+                        <div key={item.label} className="flex items-center gap-3">
+                          <span className="text-[11px] text-white/35 w-20 shrink-0">{item.label}</span>
+                          <div className="flex-1 h-1 bg-white/8 rounded-full overflow-hidden">
+                            <div className="h-full rounded-full" style={{ width: `${item.score}%`, background: item.color }} />
+                          </div>
+                          <span className="text-[11px] font-bold w-5 text-right tabular-nums" style={{ color: item.color }}>{item.score}</span>
+                        </div>
                       ))}
-                    </ul>
-                  </div>
+                    </div>
 
-                  {/* Rewrite preview */}
-                  <div className="bg-white/3 border border-white/8 rounded-xl p-3.5">
-                    <p className="text-[10px] font-bold text-white/30 uppercase tracking-widest mb-2">AI headline rewrite</p>
-                    <p className="text-[11px] text-white/30 line-through mb-1.5">&ldquo;Software Developer at Acme&rdquo;</p>
-                    <p className="text-[11px] text-sky-300 leading-relaxed">&ldquo;Full-Stack Engineer · Python · SQL · Building data products that ship&rdquo;</p>
+                    {/* Divider */}
+                    <div className="border-t border-white/6" />
+
+                    {/* Headline rewrite */}
+                    <div>
+                      <p className="text-[10px] font-semibold text-white/25 uppercase tracking-widest mb-2">AI headline rewrite</p>
+                      <p className="text-[11px] text-white/25 line-through leading-relaxed mb-1.5">Software Developer at Acme Corp</p>
+                      <div className="flex items-start gap-2">
+                        <div className="w-3.5 h-3.5 rounded-full bg-[#0A66C2]/20 border border-[#0A66C2]/40 flex items-center justify-center shrink-0 mt-0.5">
+                          <div className="w-1 h-1 rounded-full bg-[#60a5fa]" />
+                        </div>
+                        <p className="text-[11px] text-sky-300 leading-relaxed font-medium">Full-Stack Engineer · Python · SQL · Building data products that scale</p>
+                      </div>
+                    </div>
+
+                    {/* Missing keywords */}
+                    <div className="bg-white/4 border border-white/8 rounded-xl px-3.5 py-3">
+                      <p className="text-[10px] font-semibold text-white/30 uppercase tracking-widest mb-2">Missing keywords</p>
+                      <div className="flex flex-wrap gap-1.5">
+                        {["machine learning", "data pipeline", "REST API", "agile"].map((kw) => (
+                          <span key={kw} className="text-[10px] px-2 py-0.5 rounded-full bg-red-500/10 border border-red-500/25 text-red-400">{kw}</span>
+                        ))}
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -667,25 +675,30 @@ export default async function HomePage() {
 
             {/* Right — copy */}
             <div className="order-1 lg:order-2">
-              <p className="text-xs font-semibold text-sky-400 uppercase tracking-widest mb-4">LinkedIn Optimizer</p>
-              <h2 className="text-3xl md:text-4xl font-extrabold text-white leading-tight mb-5">
+              {/* Label with LinkedIn logo */}
+              <div className="flex items-center gap-2.5 mb-5">
+                <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="#0A66C2">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+                <span className="text-xs font-semibold text-white/40 uppercase tracking-widest">LinkedIn Optimizer</span>
+              </div>
+
+              <h2 className="text-3xl md:text-4xl font-extrabold text-white leading-tight mb-4">
                 Recruiters search LinkedIn.<br />
                 <span className="text-sky-400">Make sure they find you.</span>
               </h2>
-              <p className="text-white/50 text-base leading-relaxed mb-8">
-                Most people set up their LinkedIn once and forget it. Recruiters use keyword search — if your profile doesn&apos;t have the right terms, you&apos;re invisible. HireBee scores every section and rewrites what&apos;s holding you back.
+              <p className="text-white/45 text-base leading-relaxed mb-8">
+                Your LinkedIn headline is the first thing recruiters see — and the first thing their search algorithm scores. If the right keywords aren&apos;t there, you don&apos;t appear. HireBee finds the gaps and rewrites every section.
               </p>
 
-              <div className="space-y-4 mb-9">
+              <div className="space-y-5 mb-9">
                 {[
-                  { title: "Section-by-section scoring", desc: "Headline, About, Experience, and searchability — each scored separately so you know exactly where you lose recruiters." },
-                  { title: "Keyword gap analysis", desc: "See which keywords recruiters in your field search for — and which ones are missing from your profile." },
-                  { title: "AI rewrites for every section", desc: "Get a rewritten headline and About section that leads with impact and includes the keywords that matter." },
+                  { title: "Score every section", desc: "Headline, About, Experience, and searchability — each broken down separately with a clear fix." },
+                  { title: "See your missing keywords", desc: "Know exactly which terms recruiters in your field search for that your profile is missing." },
+                  { title: "Get AI rewrites, ready to paste", desc: "An optimized headline and About section written for you — tailored to your role and experience." },
                 ].map((item) => (
-                  <div key={item.title} className="flex gap-3">
-                    <div className="w-5 h-5 rounded-full bg-sky-500/20 border border-sky-500/30 flex items-center justify-center shrink-0 mt-0.5">
-                      <div className="w-1.5 h-1.5 rounded-full bg-sky-400" />
-                    </div>
+                  <div key={item.title} className="flex gap-3.5">
+                    <CheckCircle2 className="w-4 h-4 text-sky-500 shrink-0 mt-0.5" />
                     <div>
                       <p className="text-sm font-semibold text-white mb-0.5">{item.title}</p>
                       <p className="text-sm text-white/40 leading-relaxed">{item.desc}</p>
@@ -696,7 +709,7 @@ export default async function HomePage() {
 
               <Link
                 href="/linkedin"
-                className="inline-flex items-center gap-2 bg-sky-500 hover:bg-sky-400 text-white font-semibold px-6 py-3 rounded-full transition-colors text-sm shadow-lg shadow-sky-500/20"
+                className="inline-flex items-center gap-2 bg-[#0A66C2] hover:bg-[#0958a8] text-white font-semibold px-6 py-3 rounded-full transition-colors text-sm shadow-lg shadow-[#0A66C2]/25"
               >
                 Optimize my LinkedIn <ArrowRight className="w-4 h-4" />
               </Link>
