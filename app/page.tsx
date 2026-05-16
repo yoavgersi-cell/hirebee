@@ -874,7 +874,7 @@ export default async function HomePage() {
                     <p className="text-[10px] font-bold text-amber-400 uppercase tracking-widest mb-2">3 quick wins</p>
                     <ul className="space-y-1.5">
                       {[
-                        "Add "Python" and "SQL" to headline",
+                        'Add "Python" and "SQL" to headline',
                         "Your About has no call to action",
                         "Missing 4 role-specific keywords",
                       ].map((w) => (
