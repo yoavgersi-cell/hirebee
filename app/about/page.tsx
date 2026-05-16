@@ -2,6 +2,7 @@ import { Metadata } from "next"
 import Link from "next/link"
 import { ArrowRight, Mail, Shield, Cpu, Target } from "lucide-react"
 import { HireBeeLogo } from "@/components/hirebee-logo"
+import { LandingNav } from "@/components/landing-nav"
 
 export const metadata: Metadata = {
   title: "About HireBee — AI Resume Optimizer for Job Seekers",
@@ -18,30 +19,10 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-gray-950">
-      {/* Nav */}
-      <header className="border-b border-white/8 px-6 py-4">
-        <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <HireBeeLogo size={24} />
-            <span className="font-extrabold text-white text-sm tracking-tight">HireBee</span>
-          </Link>
-          <nav className="hidden md:flex items-center gap-6">
-            <Link href="/tools" className="text-sm text-white/45 hover:text-white transition-colors">Tools</Link>
-            <Link href="/how-it-works" className="text-sm text-white/45 hover:text-white transition-colors">How it works</Link>
-            <Link href="/blog" className="text-sm text-white/45 hover:text-white transition-colors">Blog</Link>
-            <Link href="/#pricing" className="text-sm text-white/45 hover:text-white transition-colors">Pricing</Link>
-          </nav>
-          <Link
-            href="/analyze"
-            className="bg-teal-500 hover:bg-teal-400 text-white text-sm font-semibold px-4 py-2 rounded-full transition-colors"
-          >
-            Scan free →
-          </Link>
-        </div>
-      </header>
+      <LandingNav />
 
       {/* Hero */}
-      <section className="px-6 py-20 border-b border-white/6">
+      <section className="px-6 pt-36 pb-20 border-b border-white/6">
         <div className="max-w-2xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-extrabold text-white leading-tight mb-5">
             The hiring system is broken.<br />

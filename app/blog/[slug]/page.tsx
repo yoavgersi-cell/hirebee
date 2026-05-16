@@ -4,6 +4,7 @@ import Link from "next/link"
 import { ArrowLeft, ArrowRight, Clock, Tag } from "lucide-react"
 import { POSTS, POST_CONTENT } from "@/lib/blog"
 import { HireBeeLogo } from "@/components/hirebee-logo"
+import { LandingNav } from "@/components/landing-nav"
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -96,29 +97,10 @@ export default async function BlogPostPage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
       />
 
-      {/* ── Nav ── */}
-      <header className="border-b border-white/8 px-6 py-4">
-        <div className="max-w-5xl mx-auto flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <HireBeeLogo size={24} />
-            <span className="font-extrabold text-white text-sm tracking-tight">HireBee</span>
-          </Link>
-          <nav className="hidden md:flex items-center gap-6">
-            <Link href="/#features" className="text-sm text-white/45 hover:text-white transition-colors">Features</Link>
-            <Link href="/#pricing" className="text-sm text-white/45 hover:text-white transition-colors">Pricing</Link>
-            <Link href="/blog" className="text-sm text-white/80 font-medium">Blog</Link>
-          </nav>
-          <Link
-            href="/analyze"
-            className="bg-gradient-to-b from-teal-500 to-teal-600 hover:from-teal-400 hover:to-teal-500 text-white text-sm font-semibold px-4 py-2 rounded-full transition-all shadow-lg shadow-teal-500/25"
-          >
-            Scan my resume
-          </Link>
-        </div>
-      </header>
+      <LandingNav />
 
       {/* ── Article header ── */}
-      <section className="border-b border-white/6 px-6 py-14">
+      <section className="border-b border-white/6 px-6 pt-28 pb-14">
         <div className="max-w-3xl mx-auto">
           {/* Breadcrumb */}
           <Link href="/blog" className="inline-flex items-center gap-1.5 text-xs text-white/30 hover:text-white/60 transition-colors mb-8">

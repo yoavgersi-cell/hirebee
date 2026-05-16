@@ -3,6 +3,7 @@ import { Metadata } from "next"
 import { POSTS } from "@/lib/blog"
 import { HireBeeLogo } from "@/components/hirebee-logo"
 import { ArrowRight } from "lucide-react"
+import { LandingNav } from "@/components/landing-nav"
 
 export const metadata: Metadata = {
   title: "Blog — Resume & Job Search Tips | HireBee",
@@ -38,29 +39,10 @@ export default function BlogPage() {
   return (
     <div className="min-h-screen bg-gray-950">
 
-      {/* ── Nav ── */}
-      <header className="border-b border-white/8 px-6 py-4">
-        <div className="max-w-5xl mx-auto flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <HireBeeLogo size={24} />
-            <span className="font-extrabold text-white text-sm tracking-tight">HireBee</span>
-          </Link>
-          <nav className="hidden md:flex items-center gap-6">
-            <Link href="/#features" className="text-sm text-white/45 hover:text-white transition-colors">Features</Link>
-            <Link href="/#pricing" className="text-sm text-white/45 hover:text-white transition-colors">Pricing</Link>
-            <Link href="/blog" className="text-sm text-white/80 font-medium">Blog</Link>
-          </nav>
-          <Link
-            href="/analyze"
-            className="bg-gradient-to-b from-teal-500 to-teal-600 hover:from-teal-400 hover:to-teal-500 text-white text-sm font-semibold px-4 py-2 rounded-full transition-all shadow-lg shadow-teal-500/25"
-          >
-            Scan my resume
-          </Link>
-        </div>
-      </header>
+      <LandingNav />
 
       {/* ── Hero ── */}
-      <section className="border-b border-white/6 px-6 py-16">
+      <section className="border-b border-white/6 px-6 pt-32 pb-16">
         <div className="max-w-5xl mx-auto">
           <div className="inline-flex items-center gap-2 bg-teal-500/10 border border-teal-500/20 rounded-full px-3 py-1 mb-6">
             <span className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse" />

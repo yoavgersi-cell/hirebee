@@ -2,6 +2,7 @@ import { Metadata } from "next"
 import Link from "next/link"
 import { Upload, Cpu, BarChart2, Wand2, Download, ArrowRight, CheckCircle2, Shield } from "lucide-react"
 import { HireBeeLogo } from "@/components/hirebee-logo"
+import { LandingNav } from "@/components/landing-nav"
 
 export const metadata: Metadata = {
   title: "How HireBee Works — ATS Resume Scanner & Optimizer",
@@ -80,30 +81,10 @@ const FAQS = [
 export default function HowItWorksPage() {
   return (
     <div className="min-h-screen bg-gray-950">
-      {/* Nav */}
-      <header className="border-b border-white/8 px-6 py-4">
-        <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <HireBeeLogo size={24} />
-            <span className="font-extrabold text-white text-sm tracking-tight">HireBee</span>
-          </Link>
-          <nav className="hidden md:flex items-center gap-6">
-            <Link href="/tools" className="text-sm text-white/45 hover:text-white transition-colors">Tools</Link>
-            <Link href="/how-it-works" className="text-sm text-white/80 font-medium">How it works</Link>
-            <Link href="/blog" className="text-sm text-white/45 hover:text-white transition-colors">Blog</Link>
-            <Link href="/#pricing" className="text-sm text-white/45 hover:text-white transition-colors">Pricing</Link>
-          </nav>
-          <Link
-            href="/analyze"
-            className="bg-teal-500 hover:bg-teal-400 text-white text-sm font-semibold px-4 py-2 rounded-full transition-colors"
-          >
-            Scan free →
-          </Link>
-        </div>
-      </header>
+      <LandingNav />
 
       {/* Hero */}
-      <section className="px-6 py-20 text-center border-b border-white/6">
+      <section className="px-6 pt-36 pb-20 text-center border-b border-white/6">
         <div className="max-w-2xl mx-auto">
           <p className="text-xs font-semibold text-teal-400 uppercase tracking-widest mb-4">5 steps · under 2 minutes</p>
           <h1 className="text-4xl md:text-5xl font-extrabold text-white leading-tight mb-5">

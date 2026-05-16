@@ -5,6 +5,7 @@ import {
   ArrowRight, CheckCircle2,
 } from "lucide-react"
 import { HireBeeLogo } from "@/components/hirebee-logo"
+import { LandingNav } from "@/components/landing-nav"
 
 export const metadata: Metadata = {
   title: "AI Resume Tools — ATS Scanner, Builder, Cover Letter & LinkedIn | HireBee",
@@ -133,30 +134,10 @@ const ctaAccentMap: Record<string, string> = {
 export default function ToolsPage() {
   return (
     <div className="min-h-screen bg-gray-950">
-      {/* Nav */}
-      <header className="border-b border-white/8 px-6 py-4">
-        <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <HireBeeLogo size={24} />
-            <span className="font-extrabold text-white text-sm tracking-tight">HireBee</span>
-          </Link>
-          <nav className="hidden md:flex items-center gap-6">
-            <Link href="/tools" className="text-sm text-white/80 font-medium">Tools</Link>
-            <Link href="/how-it-works" className="text-sm text-white/45 hover:text-white transition-colors">How it works</Link>
-            <Link href="/blog" className="text-sm text-white/45 hover:text-white transition-colors">Blog</Link>
-            <Link href="/#pricing" className="text-sm text-white/45 hover:text-white transition-colors">Pricing</Link>
-          </nav>
-          <Link
-            href="/analyze"
-            className="bg-teal-500 hover:bg-teal-400 text-white text-sm font-semibold px-4 py-2 rounded-full transition-colors"
-          >
-            Scan free →
-          </Link>
-        </div>
-      </header>
+      <LandingNav />
 
       {/* Hero */}
-      <section className="px-6 py-20 text-center border-b border-white/6">
+      <section className="px-6 pt-36 pb-20 text-center border-b border-white/6">
         <div className="max-w-2xl mx-auto">
           <div className="inline-flex items-center gap-1.5 bg-teal-500/10 border border-teal-500/20 rounded-full px-3 py-1 mb-6">
             <span className="w-1.5 h-1.5 rounded-full bg-teal-400" />
