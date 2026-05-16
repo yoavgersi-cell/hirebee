@@ -808,6 +808,9 @@ export default async function HomePage() {
       {/* ── FAQ ── */}
       <LandingFaq />
 
+      {/* ── TEMPLATES ── */}
+      <LandingTemplates />
+
       {/* ── FINAL CTA ── */}
       <section className="py-10 md:py-24 px-6 bg-gray-950">
         <div className="max-w-2xl mx-auto text-center">

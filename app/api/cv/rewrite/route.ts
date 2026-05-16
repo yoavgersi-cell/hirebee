@@ -12,7 +12,11 @@ export async function POST(request: Request) {
   if (!user) return Response.json({ error: "User not found" }, { status: 404 })
 
   const isAdmin = user.role === "admin"
-  if (!isAdmin && user.plan !== "pro") {
+  const isPro = user.plan === "pro"
+  const isTrial = user.plan === "trial"
+  const trialExpired = isTrial && user.trialEndsAt && new Date(user.trialEndsAt) < new Date()
+  const hasAccess = isAdmin || isPro || (isTrial && !trialExpired)
+  if (!hasAccess) {
     return Response.json({ error: "pro_required" }, { status: 402 })
   }
 

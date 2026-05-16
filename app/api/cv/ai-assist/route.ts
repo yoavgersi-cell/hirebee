@@ -1,11 +1,28 @@
 import { auth } from "@/auth"
+import { prisma } from "@/lib/prisma"
 import Anthropic from "@anthropic-ai/sdk"
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 
+async function assertAccess(userId: string) {
+  const user = await prisma.user.findUnique({
+    where: { id: userId },
+    select: { plan: true, role: true, trialEndsAt: true },
+  })
+  if (!user) return false
+  const isAdmin = user.role === "admin"
+  const isPro = user.plan === "pro"
+  const isTrial = user.plan === "trial"
+  const trialExpired = isTrial && user.trialEndsAt && new Date(user.trialEndsAt) < new Date()
+  return isAdmin || isPro || (isTrial && !trialExpired)
+}
+
 export async function POST(req: Request) {
   const session = await auth()
   if (!session?.user?.id) return Response.json({ error: "Unauthorized" }, { status: 401 })
+
+  const hasAccess = await assertAccess(session.user.id)
+  if (!hasAccess) return Response.json({ error: "pro_required" }, { status: 402 })
 
   const { action, data } = await req.json()
 

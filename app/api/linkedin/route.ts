@@ -5,8 +5,6 @@ import Anthropic from "@anthropic-ai/sdk"
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 
-// ─── Helpers ──────────────────────────────────────────────────────────────────
-
 async function assertAccess(userId: string) {
   const user = await prisma.user.findUnique({
     where: { id: userId },
@@ -20,8 +18,6 @@ async function assertAccess(userId: string) {
   return isAdmin || isPro || (isTrial && !trialExpired)
 }
 
-// ─── Route ────────────────────────────────────────────────────────────────────
-
 export async function POST(req: NextRequest) {
   const session = await auth()
   if (!session?.user?.id) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
@@ -32,7 +28,7 @@ export async function POST(req: NextRequest) {
   const body = await req.json()
   const action = body.action ?? "analyze"
 
-  // ── Analyze profile ────────────────────────────────────────────────────────
+  // ── Analyze profile ──────────────────────────────────────────────────────────
   if (action === "analyze") {
     const { headline, about, experience } = body as {
       headline: string
@@ -45,28 +41,46 @@ export async function POST(req: NextRequest) {
     }
 
     const profileText = [
-      headline ? `Headline: ${headline}` : "",
-      about ? `About: ${about}` : "",
-      experience ? `Experience: ${experience}` : "",
+      headline ? `HEADLINE:\n${headline}` : "",
+      about ? `ABOUT SECTION:\n${about}` : "",
+      experience ? `EXPERIENCE:\n${experience}` : "",
     ].filter(Boolean).join("\n\n")
 
     try {
       const msg = await client.messages.create({
-        model: "claude-haiku-4-5-20251001",
-        max_tokens: 800,
+        model: "claude-sonnet-4-6",
+        max_tokens: 1800,
         messages: [{
           role: "user",
-          content: `You are an expert LinkedIn profile optimizer and recruiter. Analyze this LinkedIn profile and return ONLY valid JSON (no markdown):
+          content: `You are a senior LinkedIn recruiter and career coach who has reviewed thousands of profiles. Analyze this LinkedIn profile deeply and return ONLY valid JSON (no markdown, no explanation outside the JSON).
+
+Scoring criteria:
+- Headline (0-100): specificity, role clarity, value proposition, keywords
+- About (0-100): hook strength, story arc, achievements, call to action, length
+- Experience (0-100): impact language, metrics, progression, relevance (score 50 if not provided)
+- Overall: weighted average with your expert judgment
+
+Return this exact JSON shape:
 {
-  "score": <integer 0-100, based on: headline specificity, about section quality, measurable achievements, keyword richness, recruiter appeal>,
-  "strengths": ["specific strength 1", "specific strength 2"],
-  "gaps": ["specific gap 1", "specific gap 2", "specific gap 3"],
-  "recruiterPov": "2-3 sentence honest recruiter perspective on this profile",
-  "optimizedFor": ["detected skill/keyword 1", "detected skill/keyword 2"]
+  "score": <integer 0-100, overall profile strength>,
+  "sectionScores": {
+    "headline": <integer 0-100>,
+    "about": <integer 0-100>,
+    "experience": <integer 0-100, or 50 if not provided>
+  },
+  "strengths": [<2-3 specific, concrete strengths — not generic praise>],
+  "gaps": [<3-4 specific gaps — each must name the exact problem AND why it hurts them>],
+  "quickWins": [<3 short, specific things they can fix TODAY — actionable, specific>],
+  "recruiterPov": "<3-4 sentences: what a recruiter thinks in the first 10 seconds — be brutally honest but constructive>",
+  "keywordsFound": [<5-8 strong keywords/skills already in the profile>],
+  "keywordsMissing": [<4-6 high-value keywords missing from this profile that recruiters search for, based on the role context>],
+  "searchabilityScore": <integer 0-100, how discoverable is this profile in LinkedIn search>,
+  "targetRoles": [<2-3 roles this profile is best positioned for, based on content>],
+  "headlineRewrite": "<one improved headline (max 220 chars) — specific, keyword-rich, with clear value prop>"
 }
 
-Profile:
-${profileText.slice(0, 3000)}`,
+Profile to analyze:
+${profileText.slice(0, 4000)}`,
         }],
       })
 
@@ -81,19 +95,31 @@ ${profileText.slice(0, 3000)}`,
         parsed = {}
       }
 
+      const sectionScores = (parsed.sectionScores as Record<string, number>) ?? {}
+
       return NextResponse.json({
         score: typeof parsed.score === "number" ? parsed.score : 50,
+        sectionScores: {
+          headline: typeof sectionScores.headline === "number" ? sectionScores.headline : 50,
+          about: typeof sectionScores.about === "number" ? sectionScores.about : 50,
+          experience: typeof sectionScores.experience === "number" ? sectionScores.experience : 50,
+        },
         strengths: Array.isArray(parsed.strengths) ? parsed.strengths : [],
         gaps: Array.isArray(parsed.gaps) ? parsed.gaps : [],
+        quickWins: Array.isArray(parsed.quickWins) ? parsed.quickWins : [],
         recruiterPov: typeof parsed.recruiterPov === "string" ? parsed.recruiterPov : "",
-        optimizedFor: Array.isArray(parsed.optimizedFor) ? parsed.optimizedFor : [],
+        keywordsFound: Array.isArray(parsed.keywordsFound) ? parsed.keywordsFound : [],
+        keywordsMissing: Array.isArray(parsed.keywordsMissing) ? parsed.keywordsMissing : [],
+        searchabilityScore: typeof parsed.searchabilityScore === "number" ? parsed.searchabilityScore : 50,
+        targetRoles: Array.isArray(parsed.targetRoles) ? parsed.targetRoles : [],
+        headlineRewrite: typeof parsed.headlineRewrite === "string" ? parsed.headlineRewrite : "",
       })
     } catch {
       return NextResponse.json({ error: "Analysis failed" }, { status: 500 })
     }
   }
 
-  // ── Improve section ────────────────────────────────────────────────────────
+  // ── Improve section ──────────────────────────────────────────────────────────
   if (action === "improve") {
     const { headline, about, experience, type } = body as {
       headline: string
@@ -112,24 +138,68 @@ ${profileText.slice(0, 3000)}`,
 
     const prompts: Record<string, { prompt: string; section: "headline" | "about"; delta: string }> = {
       headline: {
-        prompt: `Rewrite this LinkedIn headline to be more specific, achievement-oriented, and recruiter-friendly. Make it stand out with concrete role + value proposition. Return ONLY the improved headline (1 line, no quotes, no explanation).\n\nCurrent profile:\n${profileContext.slice(0, 2000)}`,
+        prompt: `You are a LinkedIn expert. Rewrite this headline to be specific, keyword-rich, and immediately compelling to recruiters.
+
+Rules:
+- Max 220 characters
+- Lead with the role or seniority level
+- Add 1-2 concrete value props or skills
+- No buzzwords like "passionate" or "results-driven"
+- No hashtags
+- Return ONLY the rewritten headline, nothing else
+
+Current profile:
+${profileContext.slice(0, 2500)}`,
         section: "headline",
-        delta: "Stronger positioning (+18% impact)",
+        delta: "More specific, keyword-rich positioning",
       },
       about: {
-        prompt: `Rewrite this LinkedIn About section to be more compelling and story-driven. Open with a strong hook, highlight key achievements, and close with a clear call to action. Keep it professional but human. Return ONLY the improved About text (no quotes, no explanation).\n\nCurrent profile:\n${profileContext.slice(0, 2000)}`,
+        prompt: `You are a LinkedIn expert. Rewrite this About section to be compelling, specific, and story-driven.
+
+Rules:
+- Open with a strong 1-2 sentence hook (the problem you solve or your unique value)
+- Include 2-3 concrete achievements with metrics where possible
+- Use short paragraphs (3-4 lines max each)
+- End with a clear call to action (open to opportunities / what you're looking for)
+- 200-350 words
+- Professional but human tone — not corporate jargon
+- Return ONLY the rewritten About text, nothing else
+
+Current profile:
+${profileContext.slice(0, 2500)}`,
         section: "about",
-        delta: "More compelling story and hook",
+        delta: "Stronger hook, story, and CTA",
       },
       impact: {
-        prompt: `Rewrite the LinkedIn About section to add measurable impact language. Replace vague statements with concrete metrics and outcomes (e.g. "grew revenue by 40%", "led team of 8", "reduced churn by 22%"). If exact numbers aren't available, use realistic estimates. Return ONLY the improved About text (no quotes, no explanation).\n\nCurrent profile:\n${profileContext.slice(0, 2000)}`,
+        prompt: `You are a LinkedIn expert. Rewrite this About section to maximize measurable impact and achievements.
+
+Rules:
+- Replace every vague statement with a specific metric or outcome
+- Use formats like: "grew X by Y%", "led team of N", "saved $X", "reduced churn by Y%"
+- If exact numbers aren't in the profile, use realistic conservative estimates with "~" prefix
+- Keep the overall length similar to the original
+- Return ONLY the rewritten About text, nothing else
+
+Current profile:
+${profileContext.slice(0, 2500)}`,
         section: "about",
-        delta: "Quantified achievements added",
+        delta: "Quantified achievements throughout",
       },
       recruiter: {
-        prompt: `Rewrite the LinkedIn About section to be more recruiter-friendly. Optimize for LinkedIn search with strong keywords, clear positioning, and an immediate value statement in the first line. Remove filler phrases. Make every sentence count. Return ONLY the improved About text (no quotes, no explanation).\n\nCurrent profile:\n${profileContext.slice(0, 2000)}`,
+        prompt: `You are a senior recruiter. Rewrite this About section to be maximally recruiter-friendly.
+
+Rules:
+- First line must be a clear value statement (role + specialty + years)
+- Add high-value industry keywords naturally throughout
+- Remove all filler phrases ("I am passionate about...", "I believe in...", etc.)
+- Each sentence must signal something specific about your value
+- Keep 200-300 words
+- Return ONLY the rewritten About text, nothing else
+
+Current profile:
+${profileContext.slice(0, 2500)}`,
         section: "about",
-        delta: "More recruiter-friendly headline",
+        delta: "Optimized for recruiter search & first impression",
       },
     }
 
@@ -138,8 +208,8 @@ ${profileText.slice(0, 3000)}`,
 
     try {
       const msg = await client.messages.create({
-        model: "claude-haiku-4-5-20251001",
-        max_tokens: 600,
+        model: "claude-sonnet-4-6",
+        max_tokens: 800,
         messages: [{ role: "user", content: config.prompt }],
       })
 
